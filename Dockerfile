@@ -1,6 +1,6 @@
 # Use the official lightweight Python image.
 # https://hub.docker.com/_/python
-FROM python:3.12-slim
+FROM python:3.12-slim-bookworm
 
 # Set environment variables to prevent Python from writing pyc files to disc
 # and buffering stdout and stderr.
@@ -9,7 +9,7 @@ ENV PYTHONUNBUFFERED=1
 
 # Install system dependencies required for OpenCV (headless version needs minimal libs).
 # We clean up immediately to keep the image small.
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends \
     libglib2.0-0 libgl1 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
