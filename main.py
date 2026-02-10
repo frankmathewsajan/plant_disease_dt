@@ -75,7 +75,7 @@ def read_image_from_upload(file: UploadFile):
     "/predict/{crop}",
     summary="Crop disease inference",
 )
-async def predict(
+def predict(
     crop: str,
     file: UploadFile = File(..., description="Input image"),
     output_type: str = Query(

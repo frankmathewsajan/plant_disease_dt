@@ -10,8 +10,9 @@ ENV PYTHONUNBUFFERED=1
 # Install system dependencies required for OpenCV (headless version needs minimal libs).
 # We clean up immediately to keep the image small.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libglib2.0-0 \
+    libglib2.0-0 libgl1 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 
 # Set the working directory in the container.
 WORKDIR /app
