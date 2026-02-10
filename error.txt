@@ -1,0 +1,68 @@
+(PlantDiseaseWeights) PS C:\Users\salon\Desktop\PlantDiseaseWeights> docker build -t plant-disease-api .
+[+] Building 63.6s (6/10)                                                                                                 docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                                      0.1s
+ => => transferring dockerfile: 1.25kB                                                                                                    0.0s 
+ => [internal] load metadata for docker.io/library/python:3.12-slim                                                                       5.5s
+ => [internal] load .dockerignore                                                                                                         0.1s
+ => => transferring context: 291B                                                                                                         0.0s 
+ => [1/6] FROM docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab                36.7s
+ => => resolve docker.io/library/python:3.12-slim@sha256:9e01bf1ae5db7649a236da7be1e94ffbbbdd7a93f867dd0d8d5720d9e1f89fab                 0.1s 
+ => => sha256:4948ee38326639b0ee49566ec9752e0500fde95ffa7a4771067a7856446029fe 251B / 251B                                                0.7s 
+ => => sha256:9395e1d7be50336f1932db3e6904cc05ad5b727731f03ae218688af3f525ec30 12.11MB / 12.11MB                                         13.3s 
+ => => sha256:690eaffcf0e9a6e579bf82062d0d78590bd1bc000a309b8e76ff4ca460bcdb6f 1.29MB / 1.29MB                                            4.8s
+ => => sha256:0c8d55a45c0dc58de60579b9cc5b708de9e7957f4591fc7de941b67c7e245da0 29.78MB / 29.78MB                                         33.1s
+ => => extracting sha256:0c8d55a45c0dc58de60579b9cc5b708de9e7957f4591fc7de941b67c7e245da0                                                 1.9s 
+ => => extracting sha256:690eaffcf0e9a6e579bf82062d0d78590bd1bc000a309b8e76ff4ca460bcdb6f                                                 0.4s 
+ => => extracting sha256:9395e1d7be50336f1932db3e6904cc05ad5b727731f03ae218688af3f525ec30                                                 1.0s
+ => => extracting sha256:4948ee38326639b0ee49566ec9752e0500fde95ffa7a4771067a7856446029fe                                                 0.0s
+ => [internal] load build context                                                                                                         8.2s
+ => => transferring context: 174.51MB                                                                                                     8.2s
+ => ERROR [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     libglib2.0-0     && apt-get clean && rm -rf /var/l  21.0s 
+------
+ > [2/6] RUN apt-get update && apt-get install -y --no-install-recommends     libglib2.0-0     && apt-get clean && rm -rf /var/lib/apt/lists/*:
+1.326 Hit:1 http://deb.debian.org/debian trixie InRelease
+1.455 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+1.862 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+2.066 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9670 kB]
+10.11 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+10.36 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [104 kB]
+11.10 Fetched 9870 kB in 11s (928 kB/s)
+11.10 Reading package lists...
+12.05 Reading package lists...
+12.84 Building dependency tree...
+13.00 Reading state information...
+13.24 The following additional packages will be installed:
+13.24   libatomic1
+13.25 Suggested packages:
+13.25   low-memory-monitor
+13.25 Recommended packages:
+13.25   libglib2.0-data shared-mime-info xdg-user-dirs
+13.28 The following NEW packages will be installed:
+13.28   libatomic1 libglib2.0-0t64
+13.44 0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+13.44 Need to get 1528 kB of archives.
+13.44 After this operation, 4601 kB of additional disk space will be used.
+13.44 Ign:1 http://deb.debian.org/debian trixie/main amd64 libatomic1 amd64 14.2.0-19
+13.44 Ign:2 http://deb.debian.org/debian trixie/main amd64 libglib2.0-0t64 amd64 2.84.4-3~deb13u2
+14.47 Ign:2 http://deb.debian.org/debian trixie/main amd64 libglib2.0-0t64 amd64 2.84.4-3~deb13u2
+14.48 Ign:1 http://deb.debian.org/debian trixie/main amd64 libatomic1 amd64 14.2.0-19
+16.51 Ign:1 http://deb.debian.org/debian trixie/main amd64 libatomic1 amd64 14.2.0-19
+16.52 Ign:2 http://deb.debian.org/debian trixie/main amd64 libglib2.0-0t64 amd64 2.84.4-3~deb13u2
+20.56 Err:2 http://deb.debian.org/debian trixie/main amd64 libglib2.0-0t64 amd64 2.84.4-3~deb13u2
+20.56   Could not resolve 'deb.debian.org'
+20.57 Err:1 http://deb.debian.org/debian trixie/main amd64 libatomic1 amd64 14.2.0-19
+20.57   Could not resolve 'deb.debian.org'
+20.59 E: Failed to fetch http://deb.debian.org/debian/pool/main/g/gcc-14/libatomic1_14.2.0-19_amd64.deb  Could not resolve 'deb.debian.org'    
+20.59 E: Failed to fetch http://deb.debian.org/debian/pool/main/g/glib2.0/libglib2.0-0t64_2.84.4-3%7edeb13u2_amd64.deb  Could not resolve 'deb.debian.org'
+20.59 E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+------
+Dockerfile:12
+--------------------
+  11 |     # We clean up immediately to keep the image small.
+  12 | >>> RUN apt-get update && apt-get install -y --no-install-recommends \
+  13 | >>>     libglib2.0-0 \
+  14 | >>>     && apt-get clean && rm -rf /var/lib/apt/lists/*
+  15 |
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c apt-get update && apt-get install -y --no-install-recommends     libglib2.0-0     && apt-get clean && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+(PlantDiseaseWeights) PS C:\Users\salon\Desktop\PlantDiseaseWeights> e
