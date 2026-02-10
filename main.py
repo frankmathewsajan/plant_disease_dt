@@ -6,7 +6,7 @@ import sys
 import torch
 import ultralytics
 
-from model_core import run_inference, SUPPORTED_CROPS, _loaded_models
+from model_core import run_inference, SUPPORTED_CROPS, _loaded_models, get_model
 
 app = FastAPI(
     title="Crop Disease Detection API",
@@ -117,6 +117,51 @@ async def predict(
         "boxes": result["boxes"],
         "classification": result["classification"] if output_type == "classify" else []
     })
+
+
+
+# --------------------------------------------------
+# WARMUP
+# --------------------------------------------------
+
+@app.post(
+    "/warmup",
+    summary="Load models into memory",
+)
+def warmup(
+    crops: list[str] = Query(
+        None,
+        description="List of crops to warm up. If empty, loads all.",
+    )
+):
+    """
+    Forces loading of models into memory to avoid cold starts.
+    """
+    if not crops:
+        crops = sorted(SUPPORTED_CROPS)
+
+    loaded = []
+    errors = []
+
+    for crop in crops:
+        crop = crop.lower()
+        if crop not in SUPPORTED_CROPS:
+            errors.append(f"Skipped unsupported: {crop}")
+            continue
+        
+        try:
+            get_model(crop)
+            loaded.append(crop)
+        except Exception as e:
+            errors.append(f"Failed {crop}: {str(e)}")
+
+    return {
+        "message": "Warmup complete",
+        "loaded_models": loaded,
+        "errors": errors,
+        "total_loaded": len(loaded),
+        "cache_size": len(_loaded_models),
+    }
 
 
 # --------------------------------------------------
